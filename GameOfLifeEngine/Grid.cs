@@ -5,7 +5,7 @@ using PrathameshKulkarni.GameOfLifeEngine.Base;
 
 namespace PrathameshKulkarni.GameOfLifeEngine
 {
-    public class Grid : IGrid
+    public class Grid : IGrid<ICell>
     {
         #region Fields
 

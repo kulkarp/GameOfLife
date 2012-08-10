@@ -5,9 +5,9 @@ using PrathameshKulkarni.GameOfLifeEngine.Base;
 
 namespace PrathameshKulkarni.GameOfLifeEngineTests
 {
-    public class FakeCellRule : CellRule
+    public class FakeCellRule : CellRule<IGrid<ICell>>
     {
-        public FakeCellRule(IGrid grid, INeighbourCalculator neighbourCalculator)
+        public FakeCellRule(IGrid<ICell> grid, INeighbourCalculator<ICell> neighbourCalculator)
             : base(grid, neighbourCalculator)
         {
         }
@@ -26,7 +26,7 @@ namespace PrathameshKulkarni.GameOfLifeEngineTests
     [TestFixture]
     public class CellRuleTests
     {
-        private INeighbourCalculator _neighbourCalculator;
+        private INeighbourCalculator<ICell> _neighbourCalculator;
         private FakeCellRule _cellRule;
 
         [SetUp]

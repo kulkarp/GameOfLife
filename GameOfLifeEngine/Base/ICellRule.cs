@@ -1,7 +1,7 @@
 ﻿namespace PrathameshKulkarni.GameOfLifeEngine.Base
 {
-    public interface ICellRule
+    public interface ICellRule<TC> where TC:ICell
     {
-        void Execute(ICell cell);
+        void Execute(TC cell);
     }
 }

@@ -3,17 +3,17 @@ using PrathameshKulkarni.GameOfLifeEngine.Base;
 
 namespace PrathameshKulkarni.GameOfLifeEngine
 {
-    public class NeighbourCalculator:INeighbourCalculator
+    public class NeighbourCalculator:INeighbourCalculator<ICell>
     {
         #region Fields
 
-        private readonly IGrid _grid;
+        private readonly IGrid<ICell> _grid;
 
         #endregion
 
         #region Constructor
 
-        public NeighbourCalculator(IGrid grid)
+        public NeighbourCalculator(IGrid<ICell> grid)
         {
             _grid = grid;
         }

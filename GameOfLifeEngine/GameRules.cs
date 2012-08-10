@@ -2,14 +2,14 @@ using PrathameshKulkarni.GameOfLifeEngine.Base;
 
 namespace PrathameshKulkarni.GameOfLifeEngine
 {
-    public class GameRules : IGameRules
+    public class GameRules : IGameRules<ICellRule<ICell>>
     {
-        public GameRules(ICellRule liveCellRule, ICellRule deadCellRule)
+        public GameRules(ICellRule<ICell> liveCellRule, ICellRule<ICell> deadCellRule)
         {
             LiveCellRule = liveCellRule;
             DeadCellRule = deadCellRule;
         }
-        public ICellRule LiveCellRule { get; private set; }
-        public ICellRule DeadCellRule { get; private set; }
+        public ICellRule<ICell> LiveCellRule { get; private set; }
+        public ICellRule<ICell> DeadCellRule { get; private set; }
     }
 }

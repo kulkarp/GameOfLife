@@ -4,9 +4,9 @@ using PrathameshKulkarni.GameOfLifeEngine.Base;
 
 namespace PrathameshKulkarni.GameOfLifeEngine
 {
-    public class LiveCellRule : CellRule
+    public class LiveCellRule : CellRule<IGrid<ICell>>
     {
-        public LiveCellRule(IGrid grid, INeighbourCalculator neighbourCalculator)
+        public LiveCellRule(IGrid<ICell> grid, INeighbourCalculator<ICell> neighbourCalculator)
             : base(grid, neighbourCalculator)
         {
         }

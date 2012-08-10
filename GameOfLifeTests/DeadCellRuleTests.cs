@@ -9,7 +9,7 @@ namespace PrathameshKulkarni.GameOfLifeEngineTests
     public class DeadCellRuleTests
     {
         private NeighbourCalculator _neighbourCalculator;
-        private ICellRule _deadCellRule;
+        private ICellRule<ICell> _deadCellRule;
 
         [SetUp]
         public void SetUp()

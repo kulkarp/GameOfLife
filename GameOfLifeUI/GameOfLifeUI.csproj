@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GridPrinter.cs" />
+    <Compile Include="Base\IGridRowColumnParser.cs" />
+    <Compile Include="GridRowColumnParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

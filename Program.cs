@@ -6,12 +6,4 @@
         {
         }
     }
-
-    public class TheGameOfLife
-    {
-        public void Start()
-        {
-            //this should start the game
-        }
-    }
 }

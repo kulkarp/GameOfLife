@@ -10,7 +10,7 @@ namespace PrathameshKulkarni.GameOfLifeUI
         private const char DeadCell = '.';
         private const char Separator = ' ';
 
-        public static string ToConsoleFormattedString(this IGrid grid)
+        public static string ToConsoleFormattedString(this IGrid<ICell> grid)
         {
             var builder = new StringBuilder();
             for (var rowIndex = 0; rowIndex < grid.NumberOfRows; rowIndex++)

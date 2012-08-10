@@ -2,8 +2,8 @@ using System.Collections.Generic;
 
 namespace PrathameshKulkarni.GameOfLifeEngine.Base
 {
-    public interface INeighbourCalculator
+    public interface INeighbourCalculator<TC> where TC:ICell
     {
-        IEnumerable<ICell> RetrieveNeighbours(int rowIndex, int columnIndex);
+        IEnumerable<TC> RetrieveNeighbours(int rowIndex, int columnIndex);
     }
 }

@@ -1,9 +1,9 @@
 namespace PrathameshKulkarni.GameOfLifeEngine.Base
 {
-    public interface IGameRules
+    public interface IGameRules<TCR> where TCR:ICellRule<ICell>
     {
-        ICellRule LiveCellRule { get; }
+        TCR LiveCellRule { get; }
 
-        ICellRule DeadCellRule { get; }
+        TCR DeadCellRule { get; }
     }
 }

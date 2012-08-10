@@ -3,12 +3,12 @@ using System.Linq;
 
 namespace PrathameshKulkarni.GameOfLifeEngine.Base
 {
-    public abstract class CellRule : ICellRule
+    public abstract class CellRule<TG> : ICellRule<ICell> where TG:IGrid<ICell>
     {
-        protected IGrid Grid;
-        protected INeighbourCalculator NeighbourCalculator;
+        protected TG Grid;
+        protected INeighbourCalculator<ICell> NeighbourCalculator;
 
-        public CellRule(IGrid grid, INeighbourCalculator neighbourCalculator)
+        public CellRule(TG grid, INeighbourCalculator<ICell> neighbourCalculator)
         {
             Grid = grid;
             NeighbourCalculator = neighbourCalculator;
