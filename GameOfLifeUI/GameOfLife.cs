@@ -23,7 +23,6 @@ namespace PrathameshKulkarni.GameOfLifeUI
 
         #endregion
 
-
         #region Constructor
 
         public GameOfLife(INeighbourCalculator<ICell, IGrid<ICell>> neighbourCalculator,
@@ -38,7 +37,6 @@ namespace PrathameshKulkarni.GameOfLifeUI
         }
 
         #endregion
-
 
         #region Public
 
