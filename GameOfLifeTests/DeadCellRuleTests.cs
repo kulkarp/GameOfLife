@@ -9,13 +9,13 @@ namespace PrathameshKulkarni.GameOfLifeEngineTests
     public class DeadCellRuleTests
     {
         private NeighbourCalculator _neighbourCalculator;
-        private ICellRule<ICell> _deadCellRule;
+        private ICellRule<ICell, IGrid<ICell>> _deadCellRule;
 
         [SetUp]
         public void SetUp()
         {
-            _neighbourCalculator = new NeighbourCalculator(TestObjects.ThreexThreeGrid);
-            _deadCellRule = new DeadCellRule(TestObjects.ThreexThreeGrid, _neighbourCalculator);
+            _neighbourCalculator = new NeighbourCalculator { Grid = TestObjects.ThreexThreeGrid };
+            _deadCellRule = new DeadCellRule{Grid = TestObjects.ThreexThreeGrid, NeighbourCalculator = _neighbourCalculator};
         }
 
         [TearDown]

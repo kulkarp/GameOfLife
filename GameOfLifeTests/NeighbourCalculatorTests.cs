@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using NUnit.Framework;
 using PrathameshKulkarni.GameOfLifeEngine;
 
@@ -7,12 +8,22 @@ namespace PrathameshKulkarni.GameOfLifeEngineTests
     [TestFixture]
     public class NeighbourCalculatorTests
     {
+        [Test]
+        public void Test_RetrieveNeighbours_GridIsNotInitialized_ThrowsException()
+        {
+            var neighbourCalc = new NeighbourCalculator();
+            Assert.That(neighbourCalc.Grid, Is.Null);
+
+            Assert.Throws<Exception>(() => neighbourCalc.RetrieveNeighbours(0, 0),
+                                     "When the grid is not initialized exception should be thrown.");
+        }
+
         #region Tests for TwoxTwo Grid
 
         [Test]
         public void Testing_NeighbourCellsForTwoxTwoGridRowIndex0AndColIndex0()
         {
-            var neighbourCalc = new NeighbourCalculator(TestObjects.TwoxTwoGrid);
+            var neighbourCalc = new NeighbourCalculator(){Grid = TestObjects.TwoxTwoGrid};
             var neighbours = neighbourCalc.RetrieveNeighbours(0, 0);
 
             Assert.That(neighbours.Count(), Is.EqualTo(3), "Should have 3 neighbours");
@@ -24,7 +35,7 @@ namespace PrathameshKulkarni.GameOfLifeEngineTests
         [Test]
         public void Testing_NeighbourCellsForTwoxTwoGridRowIndex0AndColIndex1()
         {
-            var neighbourCalc = new NeighbourCalculator(TestObjects.TwoxTwoGrid);
+            var neighbourCalc = new NeighbourCalculator{Grid = TestObjects.TwoxTwoGrid};
             var neighbours = neighbourCalc.RetrieveNeighbours(0, 1);
 
             Assert.That(neighbours.Count(), Is.EqualTo(3), "Should have 3 neighbours");
@@ -36,7 +47,7 @@ namespace PrathameshKulkarni.GameOfLifeEngineTests
         [Test]
         public void Testing_NeighbourCellsForTwoxTwoGridRowIndex1AndColIndex0()
         {
-            var neighbourCalc = new NeighbourCalculator(TestObjects.TwoxTwoGrid);
+            var neighbourCalc = new NeighbourCalculator{Grid = TestObjects.TwoxTwoGrid};
             var neighbours = neighbourCalc.RetrieveNeighbours(1, 0);
 
             Assert.That(neighbours.Count(), Is.EqualTo(3), "Should have 3 neighbours");
@@ -48,7 +59,7 @@ namespace PrathameshKulkarni.GameOfLifeEngineTests
         [Test]
         public void Testing_NeighbourCellsForTwoxTwoGridRowIndex1AndColIndex1()
         {
-            var neighbourCalc = new NeighbourCalculator(TestObjects.TwoxTwoGrid);
+            var neighbourCalc = new NeighbourCalculator{Grid = TestObjects.TwoxTwoGrid};
             var neighbours = neighbourCalc.RetrieveNeighbours(1, 1);
 
             Assert.That(neighbours.Count(), Is.EqualTo(3), "Should have 3 neighbours");
@@ -64,7 +75,7 @@ namespace PrathameshKulkarni.GameOfLifeEngineTests
         [Test]
         public void Testing_NeighbourCellsForThreexThreeGridRowIndex0AndColIndex0()
         {
-            var neighbourCalc = new NeighbourCalculator(TestObjects.ThreexThreeGrid);
+            var neighbourCalc = new NeighbourCalculator{Grid = TestObjects.ThreexThreeGrid};
             var neighbours = neighbourCalc.RetrieveNeighbours(0, 0);
 
             Assert.That(neighbours.Count(), Is.EqualTo(3), "Should have 3 neighbours");
@@ -76,7 +87,7 @@ namespace PrathameshKulkarni.GameOfLifeEngineTests
         [Test]
         public void Testing_NeighbourCellsForThreexThreeGridRowIndex0AndColIndex1()
         {
-            var neighbourCalc = new NeighbourCalculator(TestObjects.ThreexThreeGrid);
+            var neighbourCalc = new NeighbourCalculator{Grid = TestObjects.ThreexThreeGrid};
             var neighbours = neighbourCalc.RetrieveNeighbours(0, 1);
 
             Assert.That(neighbours.Count(), Is.EqualTo(5), "Should have 5 neighbours");
@@ -90,7 +101,7 @@ namespace PrathameshKulkarni.GameOfLifeEngineTests
         [Test]
         public void Testing_NeighbourCellsForThreexThreeGridRowIndex0AndColIndex2()
         {
-            var neighbourCalc = new NeighbourCalculator(TestObjects.ThreexThreeGrid);
+            var neighbourCalc = new NeighbourCalculator { Grid = TestObjects.ThreexThreeGrid };
             var neighbours = neighbourCalc.RetrieveNeighbours(0, 2);
 
             Assert.That(neighbours.Count(), Is.EqualTo(3), "Should have 3 neighbours");
@@ -102,7 +113,7 @@ namespace PrathameshKulkarni.GameOfLifeEngineTests
         [Test]
         public void Testing_NeighbourCellsForThreexThreeGridRowIndex1AndColIndex0()
         {
-            var neighbourCalc = new NeighbourCalculator(TestObjects.ThreexThreeGrid);
+            var neighbourCalc = new NeighbourCalculator{Grid = TestObjects.ThreexThreeGrid};
             var neighbours = neighbourCalc.RetrieveNeighbours(1, 0);
 
             Assert.That(neighbours.Count(), Is.EqualTo(5), "Should have 5 neighbours");
@@ -116,7 +127,7 @@ namespace PrathameshKulkarni.GameOfLifeEngineTests
         [Test]
         public void Testing_NeighbourCellsForThreexThreeGridRowIndex1AndColIndex1()
         {
-            var neighbourCalc = new NeighbourCalculator(TestObjects.ThreexThreeGrid);
+            var neighbourCalc = new NeighbourCalculator{Grid = TestObjects.ThreexThreeGrid};
             var neighbours = neighbourCalc.RetrieveNeighbours(1, 1);
 
             Assert.That(neighbours.Count(), Is.EqualTo(8), "Should have 8 neighbours");
@@ -133,7 +144,7 @@ namespace PrathameshKulkarni.GameOfLifeEngineTests
         [Test]
         public void Testing_NeighbourCellsForThreexThreeGridRowIndex1AndColIndex2()
         {
-            var neighbourCalc = new NeighbourCalculator(TestObjects.ThreexThreeGrid);
+            var neighbourCalc = new NeighbourCalculator{Grid = TestObjects.ThreexThreeGrid};
             var neighbours = neighbourCalc.RetrieveNeighbours(1, 2);
 
             Assert.That(neighbours.Count(), Is.EqualTo(5), "Should have 5 neighbours");
@@ -147,7 +158,7 @@ namespace PrathameshKulkarni.GameOfLifeEngineTests
         [Test]
         public void Testing_NeighbourCellsForThreexThreeGridRowIndex2AndColIndex0()
         {
-            var neighbourCalc = new NeighbourCalculator(TestObjects.ThreexThreeGrid);
+            var neighbourCalc = new NeighbourCalculator{Grid = TestObjects.ThreexThreeGrid};
             var neighbours = neighbourCalc.RetrieveNeighbours(2, 0);
 
             Assert.That(neighbours.Count(), Is.EqualTo(3), "Should have 3 neighbours");
@@ -159,7 +170,7 @@ namespace PrathameshKulkarni.GameOfLifeEngineTests
         [Test]
         public void Testing_NeighbourCellsForThreexThreeGridRowIndex2AndColIndex1()
         {
-            var neighbourCalc = new NeighbourCalculator(TestObjects.ThreexThreeGrid);
+            var neighbourCalc = new NeighbourCalculator{Grid = TestObjects.ThreexThreeGrid};
             var neighbours = neighbourCalc.RetrieveNeighbours(2, 1);
 
             Assert.That(neighbours.Count(), Is.EqualTo(5), "Should have 5 neighbours");
@@ -173,7 +184,7 @@ namespace PrathameshKulkarni.GameOfLifeEngineTests
         [Test]
         public void Testing_NeighbourCellsForThreexThreeGridRowIndex2AndColIndex2()
         {
-            var neighbourCalc = new NeighbourCalculator(TestObjects.ThreexThreeGrid);
+            var neighbourCalc = new NeighbourCalculator{Grid = TestObjects.ThreexThreeGrid};
             var neighbours = neighbourCalc.RetrieveNeighbours(2, 2);
 
             Assert.That(neighbours.Count(), Is.EqualTo(3), "Should have 3 neighbours");

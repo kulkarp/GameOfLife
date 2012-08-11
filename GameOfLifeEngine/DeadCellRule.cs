@@ -4,13 +4,8 @@ using PrathameshKulkarni.GameOfLifeEngine.Base;
 
 namespace PrathameshKulkarni.GameOfLifeEngine
 {
-    public class DeadCellRule : CellRule<IGrid<ICell>>
+    public class DeadCellRule : CellRule<ICell, IGrid<ICell>>
     {
-        public DeadCellRule(IGrid<ICell> grid, INeighbourCalculator<ICell> neighbourCalculator)
-            : base(grid, neighbourCalculator)
-        {
-        }
-
         public override void Execute(ICell cell)
         {
             ValidateCell(cell);

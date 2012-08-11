@@ -1,30 +1,32 @@
 using System;
-using System.Linq;
 
 namespace PrathameshKulkarni.GameOfLifeEngine.Base
 {
-    public abstract class CellRule<TG> : ICellRule<ICell> where TG:IGrid<ICell>
+    public abstract class CellRule<TC, TG> : ICellRule<TC, TG>
+        where TC : ICell
+        where TG : IGrid<TC>
     {
-        protected TG Grid;
-        protected INeighbourCalculator<ICell> NeighbourCalculator;
+        public abstract void Execute(TC cell);
 
-        public CellRule(TG grid, INeighbourCalculator<ICell> neighbourCalculator)
-        {
-            Grid = grid;
-            NeighbourCalculator = neighbourCalculator;
-        }
+        public INeighbourCalculator<TC, TG> NeighbourCalculator { get; set; }
 
-        public abstract void Execute(ICell cell);
-       
-        protected virtual void ValidateCell(ICell cell)
+        public TG Grid { get; set; }
+
+        protected virtual void ValidateCell(TC cell)
         {
+            if (Grid == null)
+            {
+                throw new Exception("Grid needs to be set before calling this method");
+            }
+
+            if (NeighbourCalculator == null)
+            {
+                throw new Exception("NeighbourCalculator needs to be set before calling this method");
+            }
+
             if (cell == null)
             {
                 throw new ArgumentNullException("cell", "Cannot be null");
-            }
-            if (!Grid.Cells.Contains(cell))
-            {
-                throw new ArgumentException("Cell should be part of grid that was used to initialize this rule", "cell");
             }
         }
     }

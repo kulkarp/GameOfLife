@@ -48,6 +48,16 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="GameOfLifeEngine\GameOfLifeEngine.csproj">
+      <Project>{F3330445-4B65-47F1-AAE1-987B7001200C}</Project>
+      <Name>GameOfLifeEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="GameOfLifeUI\GameOfLifeUI.csproj">
+      <Project>{40B4516B-77B9-460B-A136-F78834360DF5}</Project>
+      <Name>GameOfLifeUI</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

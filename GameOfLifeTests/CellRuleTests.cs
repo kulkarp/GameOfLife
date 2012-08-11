@@ -5,13 +5,8 @@ using PrathameshKulkarni.GameOfLifeEngine.Base;
 
 namespace PrathameshKulkarni.GameOfLifeEngineTests
 {
-    public class FakeCellRule : CellRule<IGrid<ICell>>
+    public class FakeCellRule : CellRule<ICell, IGrid<ICell>>
     {
-        public FakeCellRule(IGrid<ICell> grid, INeighbourCalculator<ICell> neighbourCalculator)
-            : base(grid, neighbourCalculator)
-        {
-        }
-
         public override void Execute(ICell cell)
         {
             throw new System.NotImplementedException();
@@ -26,14 +21,14 @@ namespace PrathameshKulkarni.GameOfLifeEngineTests
     [TestFixture]
     public class CellRuleTests
     {
-        private INeighbourCalculator<ICell> _neighbourCalculator;
+        private INeighbourCalculator<ICell, IGrid<ICell>> _neighbourCalculator;
         private FakeCellRule _cellRule;
 
         [SetUp]
         public void SetUp()
         {
-            _neighbourCalculator = new NeighbourCalculator(TestObjects.ThreexThreeGrid);
-            _cellRule = new FakeCellRule(TestObjects.ThreexThreeGrid, _neighbourCalculator);
+            _neighbourCalculator = new NeighbourCalculator { Grid = TestObjects.ThreexThreeGrid };
+            _cellRule = new FakeCellRule();
         }
 
         [TearDown]
@@ -46,13 +41,28 @@ namespace PrathameshKulkarni.GameOfLifeEngineTests
         [Test]
         public void Test_ValidateCell_NullCellIsPassedAsParam_ThrowsArgumentNullException()
         {
+            _cellRule.Grid = TestObjects.TwoxTwoGrid;
+            _cellRule.NeighbourCalculator = _neighbourCalculator;
             Assert.Throws<ArgumentNullException>(() => _cellRule.Validate(null));
         }
 
         [Test]
-        public void Test_ValidateCell_CellNotAddedToGridIsPassedAsParam_ThrowsArgumentNullException()
+        public void Test_ValidateCell_GridIsNotSet_ThrowsException()
         {
-            Assert.Throws<ArgumentNullException>(() => _cellRule.Validate(null));
+            _cellRule.Grid = null;
+            _cellRule.NeighbourCalculator = _neighbourCalculator;
+
+            Assert.Throws<Exception>(() => _cellRule.Validate(TestObjects.TwoxTwoGrid.GetCellByIndex(0, 0)));
         }
+        
+        [Test]
+        public void Test_ValidateCell_NeighbourCalculatorIsNotSet_ThrowsException()
+        {
+            _cellRule.Grid = TestObjects.ThreexThreeGrid;
+            _cellRule.NeighbourCalculator = null;
+
+            Assert.Throws<Exception>(() => _cellRule.Validate(TestObjects.TwoxTwoGrid.GetCellByIndex(0, 0)));
+        }
+
     }
 }

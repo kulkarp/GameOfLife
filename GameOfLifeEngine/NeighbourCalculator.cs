@@ -1,22 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PrathameshKulkarni.GameOfLifeEngine.Base;
 
 namespace PrathameshKulkarni.GameOfLifeEngine
 {
-    public class NeighbourCalculator:INeighbourCalculator<ICell>
+    public class NeighbourCalculator:INeighbourCalculator<ICell, IGrid<ICell>>
     {
         #region Fields
 
-        private readonly IGrid<ICell> _grid;
-
-        #endregion
-
-        #region Constructor
-
-        public NeighbourCalculator(IGrid<ICell> grid)
-        {
-            _grid = grid;
-        }
+        private IGrid<ICell> _grid;
 
         #endregion
 
@@ -25,6 +17,11 @@ namespace PrathameshKulkarni.GameOfLifeEngine
         public IEnumerable<ICell> RetrieveNeighbours(int rowIndex, int columnIndex)
         {
             var neighbours = new List<ICell>();
+
+            if (_grid == null)
+            {
+                throw new Exception("Grid needs to be initialized before calling this method");
+            }
 
             ICell neighbour = CalculateDiagonalTopLeftNeighbour(rowIndex, columnIndex);
             if (neighbour != null)
@@ -75,6 +72,12 @@ namespace PrathameshKulkarni.GameOfLifeEngine
             }
 
             return neighbours;
+        }
+
+        public IGrid<ICell> Grid
+        {
+            get { return _grid; }
+            set { _grid = value; }
         }
 
         #endregion
