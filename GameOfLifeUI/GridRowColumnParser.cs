@@ -44,10 +44,10 @@ namespace PrathameshKulkarni.GameOfLifeUI
         /// <returns></returns>
         public IGrid<ICell> Parse(string gridRowColumnString, int numberofRows, int numberOfcolumns)
         {
+            //create a grid and initialize it with dead cells
             var grid = CreateGrid(numberofRows, numberOfcolumns);
-
-            if (gridRowColumnString.Trim().Length != 0)//no alive cells
-            {
+            if (gridRowColumnString.Trim(' ', _rowColumnPairsSeparator[0]).Length != 0)//no alive cells
+            {                
                 var rowColumnPairs = gridRowColumnString.Split(_rowColumnPairsSeparator);   
                 foreach (var rowColumnPair in rowColumnPairs)
                 {

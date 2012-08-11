@@ -28,16 +28,33 @@ namespace PrathameshKulkarni.GameOfLifeEngine
 
         #region Public
 
+        /// <summary>
+        /// gets cells contained in the grid
+        /// </summary>
         public IEnumerable<ICell> Cells
         {
             //TODO:Need to think of a better way to do this 
             get { return _grid.Cast<ICell>().AsEnumerable(); }
         }
 
+        /// <summary>
+        /// gets number of rows in the grid
+        /// </summary>
         public int NumberOfRows { get; private set; }
 
+        /// <summary>
+        /// gets the number of columns in the 
+        /// grid
+        /// </summary>
         public int NumberOfColumns { get; private set; }
 
+        /// <summary>
+        /// gets a cell from the grid by using
+        /// its position - row and column index
+        /// </summary>
+        /// <param name="rowIndex"></param>
+        /// <param name="columnIndex"></param>
+        /// <returns></returns>
         public ICell GetCellByIndex(int rowIndex, int columnIndex)
         {
             ValidateCellIndexes(rowIndex, columnIndex);
@@ -45,6 +62,10 @@ namespace PrathameshKulkarni.GameOfLifeEngine
             return _grid[rowIndex, columnIndex];
         }
 
+        /// <summary>
+        /// Adds a cell to the grid
+        /// </summary>
+        /// <param name="cell"></param>
         public void AddCell(ICell cell)
         {
             ValidateCell(cell);

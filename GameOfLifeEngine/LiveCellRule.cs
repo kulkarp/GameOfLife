@@ -4,8 +4,22 @@ using PrathameshKulkarni.GameOfLifeEngine.Base;
 
 namespace PrathameshKulkarni.GameOfLifeEngine
 {
+    /// <summary>
+    /// class representing the rule which will
+    /// act on live <see cref="ICell"/> objects.
+    /// The rule states that a live cell continues
+    /// to remain alive if it has exactly 2 or 3 
+    /// neighbors. In all other cases, it becomes 
+    /// dead.
+    /// </summary>
     public class LiveCellRule : CellRule<ICell, IGrid<ICell>>
     {
+        /// <summary>
+        /// Acts on the <paramref name="cell"/>
+        /// to execute the rule using <see cref="ICellRule{TC,TG}.NeighbourCalculator"/>
+        /// and <see cref="ICellRule{TC,TG}.Grid"/>
+        /// </summary>
+        /// <param name="cell"></param>
         public override void Execute(ICell cell)
         {
             ValidateCell(cell);

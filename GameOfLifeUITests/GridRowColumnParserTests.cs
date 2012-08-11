@@ -39,9 +39,12 @@ namespace PrathameshKulkarni.GameOfLifeUITests
         }
 
         [Test]
-        public void Test_Parse_GridRowColumnStringIsNotValidScenarioTwo_ThrowsArgumentException()
+        public void Test_Parse_GridRowColumnStringIsNotValidScenarioTwo_ReturnsAGridOf4x4OfDeadCells()
         {
-            Assert.Throws<ArgumentException>(() => _parser.Parse("|", 4, 4));
+            var grid = _parser.Parse("|", 4, 4);
+
+            Assert.That(grid.Cells.Count(), Is.EqualTo(16), "A 4x4 grid should have 16 cells");
+            Assert.That(grid.Cells.Where(c=>c.IsAlive).Count(), Is.EqualTo(0), "Should have had 0 live cells");
         }
 
         [Test]

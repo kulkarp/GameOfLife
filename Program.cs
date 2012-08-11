@@ -1,5 +1,6 @@
-﻿using System;
+﻿using PrathameshKulkarni.GameOfLifeEngine;
 using PrathameshKulkarni.GameOfLifeUI;
+using PrathameshKulkarni.GameOfLifeUI.Base;
 
 namespace PrathameshKulkarni.GameOfLife
 {
@@ -7,7 +8,13 @@ namespace PrathameshKulkarni.GameOfLife
     {
         static void Main(string[] args)
         {
-            var gameOfLife = new GameOfLifeUI.GameOfLife(new GridRowColumnParser());
+            //fetch the dependencies - here we just create them
+            var neighbourCalculator = new NeighbourCalculator();
+            var gameRules = new GameRules(new LiveCellRule(), new DeadCellRule());
+            var gridRowColumnParser = new GridRowColumnParser();
+            //typically we would create such an object and inject its dependencies
+            //using an IoC container
+            IGameOfLife gameOfLife = new GameOfLifeUI.GameOfLife(neighbourCalculator, gameRules, gridRowColumnParser);
             gameOfLife.Start();
         }
     }

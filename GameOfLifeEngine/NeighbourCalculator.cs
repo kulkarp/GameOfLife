@@ -74,6 +74,11 @@ namespace PrathameshKulkarni.GameOfLifeEngine
             return neighbours;
         }
 
+        /// <summary>
+        /// gets/sets the grid which will be 
+        /// used by <see cref="RetrieveNeighbours"/>
+        /// to calculate the neighbors of a cell
+        /// </summary>
         public IGrid<ICell> Grid
         {
             get { return _grid; }
