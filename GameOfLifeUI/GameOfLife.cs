@@ -63,6 +63,8 @@ namespace PrathameshKulkarni.GameOfLifeUI
                 }
                 Console.WriteLine("Following grid will be used:");
                 Console.WriteLine(_userGrid.ToConsoleFormattedString());
+                Console.WriteLine("Press Enter key to continue.");
+                Console.ReadLine();                
                 StartEvolution();
             } while (GetUserConfirmation());
         }
