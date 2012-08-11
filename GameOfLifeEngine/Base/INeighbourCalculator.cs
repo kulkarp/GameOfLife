@@ -28,6 +28,6 @@ namespace PrathameshKulkarni.GameOfLifeEngine.Base
         /// used by <see cref="RetrieveNeighbours"/>
         /// to calculate the neighbors of a cell
         /// </summary>
-        IGrid<TC> Grid { get; set; }
+        TG Grid { get; set; }
     }
 }
