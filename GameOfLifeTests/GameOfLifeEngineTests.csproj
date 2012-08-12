@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CellRuleTests.cs" />
+    <Compile Include="EvolutionEngineTests.cs" />
     <Compile Include="LiveCellRuleTests.cs" />
     <Compile Include="DeadCellRuleTests.cs" />
     <Compile Include="GridTests.cs" />

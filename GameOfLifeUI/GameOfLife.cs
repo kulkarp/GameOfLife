@@ -1,5 +1,4 @@
 ﻿using System;
-using PrathameshKulkarni.GameOfLifeEngine;
 using PrathameshKulkarni.GameOfLifeEngine.Base;
 using PrathameshKulkarni.GameOfLifeUI.Base;
 
@@ -16,24 +15,18 @@ namespace PrathameshKulkarni.GameOfLifeUI
         private int _numberOfRows;
         private int _numberOfColumns;
         private int _numberOfEvolutions;
-        private IGrid<ICell> _userGrid = null;
+        private IGrid<ICell> _userGrid;
         private readonly IGridRowColumnParser<IGrid<ICell>> _gridRowColumnParser;
-        private readonly INeighbourCalculator<ICell, IGrid<ICell>> _neighbourCalculator;
-        private IGameRules<ICell, IGrid<ICell>, ICellRule<ICell, IGrid<ICell>>> _gameRules;
+        private readonly IEvolution<ICell, IGrid<ICell>> _evolution;
 
         #endregion
 
         #region Constructor
 
-        public GameOfLife(INeighbourCalculator<ICell, IGrid<ICell>> neighbourCalculator,
-                          IGameRules<ICell, IGrid<ICell>, ICellRule<ICell, IGrid<ICell>>> gameRules,
-                          IGridRowColumnParser<IGrid<ICell>> gridRowColumnParser)
+        public GameOfLife(IEvolution<ICell, IGrid<ICell>> evolution, IGridRowColumnParser<IGrid<ICell>> gridRowColumnParser)
         {
+            _evolution = evolution;
             _gridRowColumnParser = gridRowColumnParser;
-            _neighbourCalculator = neighbourCalculator;
-            _gameRules = gameRules;
-            _gameRules.LiveCellRule.NeighbourCalculator = _neighbourCalculator;
-            _gameRules.DeadCellRule.NeighbourCalculator = _neighbourCalculator;
         }
 
         #endregion
@@ -77,27 +70,7 @@ namespace PrathameshKulkarni.GameOfLifeUI
         {
             for (int count = 0; count < _numberOfEvolutions; count++)
             {
-                //a copy of the current grid will be used
-                //to calculate neighbors and apply rules
-                //the current grid cell change as rules are 
-                //applied and hence we need a copy
-                var gridCopy = _userGrid.GetDeepCopy();
-                _neighbourCalculator.Grid = gridCopy;
-                _gameRules.LiveCellRule.Grid = gridCopy;
-                _gameRules.DeadCellRule.Grid = gridCopy;
-
-                foreach (var cell in _userGrid.Cells)
-                {
-                    if (cell.IsAlive)
-                    {
-                        _gameRules.LiveCellRule.Execute(cell);
-                    }
-                    else
-                    {
-                        _gameRules.DeadCellRule.Execute(cell);
-                    }
-                }
-
+                _evolution.Execute(_userGrid);
                 Console.WriteLine("Grid after {0} evolution(s).\nPress enter to continue", count + 1);
                 Console.WriteLine(_userGrid.ToConsoleFormattedString());
                 Console.ReadLine();

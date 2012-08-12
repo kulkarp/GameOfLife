@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Evolution.cs" />
+    <Compile Include="Base\IEvolution.cs" />
     <Compile Include="Cell.cs" />
     <Compile Include="Base\CellRule.cs" />
     <Compile Include="DeadCellRule.cs" />
@@ -51,6 +53,7 @@
     <Compile Include="Base\IGameRules.cs" />
     <Compile Include="Base\IGrid.cs" />
     <Compile Include="Base\INeighbourCalculator.cs" />
+    <Compile Include="GridExtensions.cs" />
     <Compile Include="LiveCellRule.cs" />
     <Compile Include="NeighbourCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
